@@ -1,4 +1,5 @@
 #include"AvlNode.h"
+#include<stdexcept>
 
 int
 AvlNode::MaxHeight(AvlTree TreeOne, AvlTree TreeSecond)
@@ -9,7 +10,7 @@ AvlNode::MaxHeight(AvlTree TreeOne, AvlTree TreeSecond)
 }
 
 int
-AvlNode::Height(Position P) const 
+AvlNode::Height(Position P)
 {
 	if (P)
 		return P->height;
@@ -42,9 +43,9 @@ AvlNode::SingleRotateWithRight(Position P2)
 	P2->Right = P1->Left;
 	P1->Left = P2;
 
-	P2->height = AvlNode::MaxHeight(P2->Left, P2->Right);
+	P2->height = AvlNode::MaxHeight(P2->Left, P2->Right) + 1;
 
-	P1->height = AvlNode::MaxHeight(P1->Left, P1->Right);
+	P1->height = AvlNode::MaxHeight(P1->Left, P1->Right) + 1;
 
 	return P1;	/* new root */
 }
@@ -68,3 +69,4 @@ AvlNode::DoubleRotateWithRight(Position P3)
 	/* Rotate between P2 and P3 */
 	return SingleRotateWithRight(P3);
 }
+
